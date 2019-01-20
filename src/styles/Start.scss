@@ -1,0 +1,40 @@
+.start {
+  background: #b51f1a;
+  width: 50%;
+  height: 75%;
+  padding: 20px;
+  color: #e8e2ce;
+  overflow: scroll;
+  display: flex;
+  justify-content: center;
+}
+
+.start form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  // align-items: center;
+  height: 100%;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-button {
+  all: unset;
+  background: #404040;
+  color: white;
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  border: 2px solid #e8e2ce;
+  cursor: pointer;
+}
+
+.checkbox-container {
+  display: flex;
+  // flex-direction: column;
+  flex-wrap: wrap;
+}
