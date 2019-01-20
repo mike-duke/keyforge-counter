@@ -6,10 +6,11 @@
   color: #e8e2ce;
   overflow: scroll;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-.start form {
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

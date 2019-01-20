@@ -31,6 +31,7 @@ export default class Start extends Component {
 
     return (
       <div className="start">
+        <h1>Welcome to KeyForge!</h1>
         <div className="player player1">
           <h2>Player 1</h2>
           {playerForm}
