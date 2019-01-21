@@ -1,47 +1,80 @@
 import React, { Component } from 'react';
+import { CheckboxList } from '../components/CheckboxList';
 
 export default class Start extends Component {
+  constructor() {
+    super();
+    this.state = {
+      player1: {
+        name: '',
+        deck: '',
+        houses: []
+      },
+      player2: {
+        name: '',
+        deck: '',
+        houses: []
+      }
+    }
+  }
+
+  setHouses = (target) => {
+    const { id } = target.parentNode.parentNode.parentNode;
+    const houseName = target.name
+    this.setState({
+      [id]: {
+        ...this.state[id],
+        houses: [...this.state[id].houses, houseName]
+      }
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { player1, player2 } = this.state;
+    this.props.addPlayers(player1, player2);
+  }
+
+  handleChange = (event) => {
+    const playerId = event.target.parentNode.parentNode.id; 
+    const { id, value } = event.target;
+    this.setState({
+      [playerId]: {
+        ...this.state[playerId],
+        [id]: value
+      }
+    });
+  }
 
   render() {
     const playerForm = (
-      <form>
-        <label htmlFor="player-name">Player Name:</label>
-        <input id="player-name" type="text"/>
-        <label htmlFor="player-deck">Deck Identity:</label>
-        <input id="player-deck" type="text"/>
+      <div className="player-form">
+        <label htmlFor="name">Player Name:</label>
+        <input id="name" type="text" value={this.state.name} onChange={this.handleChange}/>
+        <label htmlFor="deck">Deck Identity:</label>
+        <input id="deck" type="text" value={this.state.deck} onChange={this.handleChange}/>
         <label htmlFor="player-houses">Deck Identity Houses:</label>
-        <div className="checkbox-container">
-          <input type="checkbox" name="brobnar" value="brobnar" id="brobnar" />
-          <label htmlFor="brobnar">Brobnar</label>
-          <input type="checkbox" name="dis" value="dis" id="dis" />
-          <label htmlFor="dis">Dis</label>
-          <input type="checkbox" name="logos" value="logos" id="logos" />
-          <label htmlFor="logos">Logos</label>
-          <input type="checkbox" name="mars" value="mars" id="mars" />
-          <label htmlFor="mars">Mars</label>
-          <input type="checkbox" name="sanctum" value="sanctum" id="sanctum" />
-          <label htmlFor="sanctum">Sanctum</label>
-          <input type="checkbox" name="shadows" value="shadows" id="shadows" />
-          <label htmlFor="shadows">Shadows</label>
-          <input type="checkbox" name="untamed" value="untamed" id="untamed" />
-          <label htmlFor="untamed">Untamed</label>
-        </div>
-      </form>
+        <CheckboxList setHouses={this.setHouses} />
+      </div>
     )
 
     return (
       <div className="start">
         <h1>Welcome to KeyForge!</h1>
-        <div className="player player1">
-          <h2>Player 1</h2>
-          {playerForm}
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <section className="player-container">
+            <div id="player1" className="player">
+              <h2>Player 1</h2>
+              {playerForm}
+            </div>
 
-        <div className="player player2">
-          <h2>Player 2</h2>
-          {playerForm}
-        </div>
-        <button className="start-button">Start!</button>
+            <div id="player2" className="player">
+              <h2>Player 2</h2>
+              {playerForm}
+            </div>
+          </section>
+          <button className="start-button">Start!</button>
+        </form>
       </div>
     )
   }
