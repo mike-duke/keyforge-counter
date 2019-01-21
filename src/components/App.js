@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Start from './Start.js';
+import { Counters } from './Counters';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -19,11 +20,21 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
+    const { player1, player2 } = this.state;
+
+    if(Object.keys(player1).length && Object.keys(player2).length) {
+      return (
+        <div className="App">
+          <Counters player1={player1} player2={player2} />
+        </div>
+      )
+    } else {
+      return (
+        <div className="App">
         <Start addPlayers={this.addPlayers} />
       </div>
-    );
+      );
+    }
   }
 }
 
