@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CheckboxList } from '../components/CheckboxList';
+import { CheckboxList } from './CheckboxList';
 
 export default class Start extends Component {
   constructor() {
